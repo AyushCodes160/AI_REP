@@ -118,7 +118,12 @@ cd frontend
 npm install
 ```
 
-3. Start the development server:
+3. (Optional) Create a `.env` file to point the UI at a remote backend:
+```bash
+echo "VITE_API_URL=https://your-backend-domain.com/api" > .env
+```
+
+4. Start the development server:
 ```bash
 npm run dev
 ```
@@ -201,6 +206,16 @@ The scheduler runs every minute to check for posts that should be posted. When a
 - Updates the `ScheduledPost` status to "posted"
 - Updates the `Draft` status to "posted"
 - Logs the action to the console
+
+## 🌐 GitHub Pages Deployment
+
+This repository is configured to ship the React frontend to GitHub Pages via the workflow in `.github/workflows/deploy.yml`.
+
+1. In your repository settings, enable GitHub Pages with the "GitHub Actions" source (this should happen automatically after the first successful deploy).
+2. Add a repository secret named `VITE_API_URL` that points to a live backend (for example, a Render/Heroku deployment). If you don't supply a value the UI will still deploy, but all API calls will fail.
+3. Push to `main` (or manually run the workflow). The action will build the Vite app, upload the `dist` folder, and publish it to `https://ayushcodes160.github.io/AI_REP/`.
+
+> ⚠️ The GitHub Pages deployment only serves the static frontend. You still need to host the Express API elsewhere and expose it via `VITE_API_URL` for the app to function.
 
 ## 📝 Notes
 
