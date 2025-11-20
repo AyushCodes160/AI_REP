@@ -207,15 +207,44 @@ The scheduler runs every minute to check for posts that should be posted. When a
 - Updates the `Draft` status to "posted"
 - Logs the action to the console
 
-## 🌐 GitHub Pages Deployment
+## 🌐 Frontend Deployment
 
-This repository is configured to ship the React frontend to GitHub Pages via the workflow in `.github/workflows/deploy.yml`.
+### Option 1: Deploy with Vercel (Recommended - Easiest)
 
-1. In your repository settings, enable GitHub Pages with the "GitHub Actions" source (this should happen automatically after the first successful deploy).
-2. Add a repository secret named `VITE_API_URL` that points to a live backend (for example, a Render/Heroku deployment). If you don't supply a value the UI will still deploy, but all API calls will fail.
-3. Push to `main` (or manually run the workflow). The action will build the Vite app, upload the `dist` folder, and publish it to `https://ayushcodes160.github.io/AI_REP/`.
+1. Go to [vercel.com](https://vercel.com) and sign in with your GitHub account
+2. Click "New Project" → Import your repository `AyushCodes160/AI_REP`
+3. Configure the project:
+   - **Root Directory:** `frontend`
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+   - **Install Command:** `npm install`
+4. Add environment variable (optional):
+   - **Key:** `VITE_API_URL`
+   - **Value:** Your backend API URL (e.g., `https://your-backend.herokuapp.com`)
+5. Click "Deploy"
+6. Your site will be live at `https://your-project.vercel.app` in ~2 minutes!
 
-> ⚠️ The GitHub Pages deployment only serves the static frontend. You still need to host the Express API elsewhere and expose it via `VITE_API_URL` for the app to function.
+### Option 2: Deploy with Netlify
+
+1. Go to [netlify.com](https://netlify.com) and sign in with GitHub
+2. Click "Add new site" → "Import an existing project"
+3. Select your repository `AyushCodes160/AI_REP`
+4. Configure build settings:
+   - **Base directory:** `frontend`
+   - **Build command:** `npm run build`
+   - **Publish directory:** `frontend/dist`
+5. Add environment variable (optional):
+   - `VITE_API_URL` = Your backend URL
+6. Click "Deploy site"
+
+### Option 3: GitHub Pages
+
+1. Go to repository Settings → Pages
+2. Under "Source", select "GitHub Actions"
+3. The workflow will automatically deploy on push to `main`
+4. Site will be available at `https://ayushcodes160.github.io/AI_REP/`
+
+> ⚠️ All deployments only serve the static frontend. You still need to host the Express API separately (e.g., Render, Railway, Heroku) and set `VITE_API_URL` for the app to function.
 
 ## 📝 Notes
 

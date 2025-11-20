@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/AI_REP/',
+  base: process.env.NODE_ENV === 'production' ? '/AI_REP/' : '/',
   server: {
     port: 3000,
     proxy: {
